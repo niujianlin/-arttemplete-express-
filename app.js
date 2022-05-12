@@ -4,12 +4,15 @@ const express =  require('express');
 const app = express();
 //PATH
 const path = require('path');
+//引入模块，用于处理post请求参数
+const bodyParser = require('body-parser');
 //数据库链接(require在导入模块的时候会执行文件)
 require('./model/connect');
 //require('./model/user');引入是为了得到初始化的用户数据
 // require('./model/user');
 
-
+// 拦截所有请求处理post请求参数，extended：false用系统模块处理，TRUE用第三方
+app.use(bodyParser.urlencoded({extended: false}))
 //告诉express模板位置在哪里
 app.set('views', path.join(__dirname, 'views'));
 //告诉express默认模板后缀是什么
