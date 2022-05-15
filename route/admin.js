@@ -3,7 +3,8 @@ const express =  require('express');
 const {User} = require('../model/user');
 // 创建博客展示页面路由,返回的是路由对象
 const admin = express.Router();
-
+//引入加密模块
+const bcryptjs = require('bcryptjs')
 //二级路由：匹配/login（先匹配/admin，后匹配/login）
 admin.get('/login', (req, res) => {
     // res.writeHead(200, {
@@ -27,7 +28,8 @@ admin.post('/login', async (req, res) => {
     //如果查询到了用户，user变量的值是对象类型，若没查到则为空
     let user = await User.findOne({email: email});
     if(user){
-        if(password == user.password){
+        let isValid = bcryptjs.compareSync(password, user.password);
+        if(isValid){
             //登录成功
             res.send('登录成功')
         }else {

@@ -1,5 +1,7 @@
 //创建用户集合
 const mongoose = require('mongoose');
+//加密模块
+ const bcryptjs = require('bcryptjs');
 
 //创建用户集合规则
 const userSchema =  new mongoose.Schema({
@@ -30,7 +32,21 @@ const userSchema =  new mongoose.Schema({
 })
 //创建集合
 const User = mongoose.model('User', userSchema);
-//创建一些数据，第一次导入初始化数据用的
+
+async function createUser() {
+    const pass = bcryptjs.hashSync('123456', 10);
+    // 创建一些数据，第一次导入初始化数据用的
+    const user = await User.create({
+        username: 'niujl',
+        email: '123@qq.com',
+        password: pass,
+        role: 'admin',
+        state: 0
+    })
+}
+// createUser();
+
+// 创建一些数据，第一次导入初始化数据用的
 // User.create({
 //     username: 'niujl',
 //     email: '123@qq.com',
