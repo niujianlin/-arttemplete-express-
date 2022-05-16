@@ -44,6 +44,14 @@ app.use('/admin', require('./middleware/loginGuard'));
 app.use('/home', home);
 app.use('/admin', admin);
 
+//触发错误处理中间件
+app.use((err, req, res, next) => {
+    //将字符串对象转换成对象类型
+    //JSON.parse()
+    const result = JSON.parse(err);
+    res.redirect(`${result.path}?message=${result.message}`);
+})
+
 //监听80端口
 app.listen(80);
 console.log('<网站服务器启动成功>');

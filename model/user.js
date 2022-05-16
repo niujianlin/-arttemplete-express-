@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 //加密模块
  const bcryptjs = require('bcryptjs');
+//引入joi模块
+const Joi = require('joi');
+
 
 //创建用户集合规则
 const userSchema =  new mongoose.Schema({
@@ -46,17 +49,24 @@ async function createUser() {
 }
 // createUser();
 
-// 创建一些数据，第一次导入初始化数据用的
-// User.create({
-//     username: 'niujl',
-//     email: '123@qq.com',
-//     password: '123456',
-//     role: 'admin',
-//     state: 0
-// }).then(() => console.log('用户创建成功！')).catch(() => console.log('用户创建失败！'));
+// 验证用户信息
+const validateUser = user => {
+    //定义验证规则
+    const schema = {
+        username: Joi.string().min(2).max(12).required().error(new Error('username不符合验证规则')),
+        email: Joi.string().email(),
+        password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required().error(new Error('email不符合验证规则')),
+        role: Joi.string().valid('normal', 'admin').required().error(new Error('角色值非法')),
+        state: Joi.number().valid(0,1).required().error(new Error('状态值非法'))
+    };
+    // 实施验证
+    return Joi.validate(user, schema);
+
+}
 
 module.exports = {
     // User: User;与下面一样
-    User
+    User,
+    validateUser
 }
 
