@@ -1,6 +1,8 @@
 const {User} = require('../../model/user');
 
+
 module.exports = async (req, res) => {
+    req.app.locals.currentLink = 'user'
     //获取到地址栏中的id参数
     const {message, id} = req.query;
 

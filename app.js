@@ -1,11 +1,18 @@
+// 导入dataformat模块
+const dateFormat = require('dateformat');
 // 导入express框架
 const express =  require('express');
+//导入art-template模板引擎
+const template = require('art-template');
 //创建网站服务器
 const app = express();
+
 //PATH
 const path = require('path');
+
 //引入模块，用于处理post请求参数
 const bodyParser = require('body-parser');
+
 //数据库链接(require在导入模块的时候会执行文件)
 require('./model/connect');
 // require('./model/user');引入是为了得到初始化的用户数据
@@ -30,6 +37,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'art');
 //当渲染后缀为art的模板时，所使用的模板引擎是什么
 app.engine('art', require('express-art-template'));
+//向模板内导入dateformat变量
+template.defaults.imports.dateFormat = dateFormat;
 //框架系统开放静态资源文件
 app.use(express.static(path.join(__dirname, 'public')));
 
