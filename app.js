@@ -48,8 +48,19 @@ app.use('/admin', admin);
 app.use((err, req, res, next) => {
     //将字符串对象转换成对象类型
     //JSON.parse()
+    //result = {path:'/admin/user-edit', message:'密码比对失败，无法进行修改', id: id}
     const result = JSON.parse(err);
-    res.redirect(`${result.path}?message=${result.message}`);
+    //params[] 里面存的是拼接的地址（?之后的参数）
+    let params = [];
+    //attr是result里的每个属性（path、message、id）
+    for (let attr in result) {
+        if(attr != 'path'){
+            params.push(attr + '=' + result[attr]);
+        }
+    }
+    // console.log('params = ' + params);
+    //join方法是拼接之间的符号。path=/admin/user-edit
+    res.redirect(`${result.path}?${params.join('&')}`);
 })
 
 //监听80端口
