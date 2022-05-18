@@ -7,6 +7,7 @@
 {{include './common/header.art'}}
 	<!-- 文章列表开始 -->
 	<ul class="list w1100">
+<!--		records里包含着查询到的所有文章信息Article-->
 		{{each result2.records}}
 		<li class="{{$index%2 == 0 ? 'fl' : 'fr'}}">
 			<a href="/home/article?id={{@$value._id}}" class="thumbnail">

@@ -19,11 +19,17 @@ module.exports = async (req, res) => {
         let isValid = bcryptjs.compareSync(password, user.password);
         if(isValid){
             req.session.username = user.username;
+            req.session.role = user.role;
             //登录成功
             //公共属性
             req.app.locals.userInfo = user;
-            //重定向到用户列表页面,前面加/，代表是localhost后面直接写admin/user
-            res.redirect('/admin/user');
+            //对用户类型做判断
+            if(user.role == 'admin'){
+                res.redirect('/admin/user')
+            }else {
+                res.redirect('/home');
+            }
+
         }else {
             res.status(400).render('admin/error', {msg: '邮箱地址或密码错误'})
         }

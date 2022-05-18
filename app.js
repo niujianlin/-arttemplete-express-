@@ -32,6 +32,9 @@ app.use(session({
             secret: 'secret key',
             resave: false, //true: 每次请求都要重新设置session
             saveUninitialized: false, //true: 每次请求默认设置session Cookie，不管有没有保存session
+            cookie: {
+                maxAge: 24 * 60 * 60 * 1000
+            }
         })
 )
 
