@@ -39,6 +39,8 @@ app.set('view engine', 'art');
 app.engine('art', require('express-art-template'));
 //向模板内导入dateformat变量
 template.defaults.imports.dateFormat = dateFormat;
+// template.defaults.imports.dateFormat = dateFormat;
+
 //框架系统开放静态资源文件
 app.use(express.static(path.join(__dirname, 'public')));
 

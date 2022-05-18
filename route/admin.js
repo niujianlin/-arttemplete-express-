@@ -29,7 +29,8 @@ admin.get('/article', require('./admin/article'))
 admin.get('/article-edit', require('./admin/artical-edit'))
 //实现文章添加功能路由
 admin.post('/article-add', require('./admin/article-add'));
-
+//实现文章修改路由
+admin.post('/article-modify', require('./admin/article-modify'));
 
 // 将路由对象作为模块成员进行导出
 module.exports = admin;
