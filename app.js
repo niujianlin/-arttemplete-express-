@@ -1,9 +1,13 @@
-// 导入dataformat模块
-const dateFormat = require('dateformat');
 // 导入express框架
 const express =  require('express');
 //导入art-template模板引擎
 const template = require('art-template');
+// 导入dataformat模块
+const dateFormat = require('dateformat');
+//导入morgan第三方模块，可以看客户端所有请求，是express中间件
+const morgan = require('morgan')
+// 导入config模块
+const config = require('config');
 //创建网站服务器
 const app = express();
 
@@ -43,6 +47,19 @@ template.defaults.imports.dateFormat = dateFormat;
 
 //框架系统开放静态资源文件
 app.use(express.static(path.join(__dirname, 'public')));
+
+//获取系统环境变量，并判断是什么环境
+console.log(config.get('title'))
+
+// //获取系统环境变量
+// // console.log(process.env.NODE_ENV);
+// if(process.env.NODE_ENV == 'development'){
+//     console.log('当前是开发环境')
+//     //在开发环境中，将客户端发送到服务器的所有请求信息打印到控制台中
+//     app.use(morgan('dev'))
+// }else {
+//     console.log('当前是生产环境')
+// }
 
 //导入路由对象
 const home = require('./route/home')
