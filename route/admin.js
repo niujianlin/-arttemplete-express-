@@ -28,7 +28,7 @@ admin.get('/article', require('./admin/article'))
 //文章编辑页面路由
 admin.get('/article-edit', require('./admin/artical-edit'))
 //实现文章添加功能路由
-admin.post('/article-add', require('./admin/article-add'));
+admin.post('/article-edit', require('./admin/article-add'));
 //实现文章修改路由
 admin.post('/article-modify', require('./admin/article-modify'));
 //删除文章功能路由

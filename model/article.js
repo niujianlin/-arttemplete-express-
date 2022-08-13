@@ -6,7 +6,7 @@ const articleSchema = new mongoose.Schema({
     title: {
         type: String,
         maxLength: 20,
-        minLength: 4,
+        minLength: 1,
         required: [true, '错误信息：请填写文章标题']
     },
     author: {

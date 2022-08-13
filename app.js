@@ -19,8 +19,10 @@ const bodyParser = require('body-parser');
 
 //数据库链接(require在导入模块的时候会执行文件)
 require('./model/connect');
-// require('./model/user');引入是为了得到初始化的用户数据
+
+//引入是为了得到初始化的用户数据niujl
 // require('./model/user');
+
 //引入express-session模块
 const session = require('express-session');
 
